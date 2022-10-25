@@ -15,15 +15,15 @@ void FillArray(int[,] ar, int aMin, int aMax) {
         for(int j=0; j<ar.GetLength(1); j++)
             ar[i,j] = random.Next(aMin, aMax);
 }
-void PrintArray(int[,] ar) {
+void PrintArray(int[,] ar, string separatorGor = " ", string separatorVer = "") {
     if(ar == null || ar.GetLength(0)==0) {
         Console.WriteLine("\t Массив пустой.");
         return;
     }    
     for(int i=0; i<ar.GetLength(0); i++) {
         for(int j=0; j<ar.GetLength(1); j++)
-            Console.Write($"{ar[i,j]} ");
-        Console.WriteLine();
+            Console.Write($"{ar[i,j]}{separatorGor}");
+        Console.WriteLine(separatorVer);
     }    
 }
 
@@ -279,7 +279,6 @@ while(isRepeat) {
     isRepeat = s != "0";
 }    
 
-*/
 
 
 taskName = "Задание №4. Показать треугольник Паскаля."
@@ -329,18 +328,131 @@ void PrintHalfTriangle(int[,] ar) {
 
 
 
-/*
-
-Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
-Например, на выходе получается вот такой массив:
-01 02 03 04
-12 13 14 05
-11 16 15 06
-10 09 08 07
+taskName = "Задание №62. Напишите программу, которая заполнит спирально массив 4 на 4.";
+isRepeat = true;
+while(isRepeat) {
+    Console.WriteLine("-----------------------------------\n\r"+taskName);
+    Console.Write("Введите количество Строк двумерного массива: ");
+    int qtyRow = int.Parse(Console.ReadLine() ?? "0");
+    Console.Write("Введите количество Столбцов двумерного массива: ");
+    int qtyCol = int.Parse(Console.ReadLine() ?? "0");
+    ar = new int[qtyRow,qtyCol];
+    Console.WriteLine("Ответ:");
+    Spiral(ar);
+    Console.WriteLine("");
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+    Console.Write("----\n\rВыполнить задание еще раз? (0-нет, 1-да):");
+    s = Console.ReadLine() ?? "0";
+    isRepeat = s != "0";
+}    
 
 */
+    Console.WriteLine("1,1");
+    ar = new int[1,1];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("1,2");
+    ar = new int[1,2];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("2,1");
+    ar = new int[2,1];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("2,2");
+    ar = new int[2,2];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("2,3");
+    ar = new int[2,3];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("3,2");
+    ar = new int[3,2];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("3,3");
+    ar = new int[3,3];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("3,4");
+    ar = new int[3,4];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("4,3");
+    ar = new int[4,3];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("4,4");
+    ar = new int[4,4];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("4,5");
+    ar = new int[4,5];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("5,4");
+    ar = new int[5,4];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("5,5");
+    ar = new int[5,5];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("6,6");
+    ar = new int[6,6];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
+
+    Console.WriteLine("7,7");
+    ar = new int[7,7];
+    Spiral(ar,1);
+    PrintArray(ar,"\t","\n");
+    Console.WriteLine("");
 
 
+void Spiral(int[,] ar, int number = 0, int level = 0) {
+//    Console.WriteLine("level="+level);
+//    PrintArray(ar,"\t","\n");
+    int temp = number;
+    int qtyRow = ar.GetLength(0);
+    int qtyCol = ar.GetLength(1);
+    for(int j=0 + level;      j<qtyCol-level; j++) if(ar[0+level, j]==0)        ar[0+level, j]       =number++; // верх
+    for(int i=1 + level;      i<qtyRow-level; i++) if(ar[i, qtyCol-1-level]==0) ar[i, qtyCol-1-level]=number++; // право
+    for(int j=qtyCol-2-level; j>=0+level;     j--) if(ar[qtyRow-1-level, j]==0) ar[qtyRow-1-level, j]=number++; // низ
+    for(int i=qtyRow-2-level; i>=1+level;     i--) if(ar[i, 0+level]==0)        ar[i, 0+level]       =number++; // лево
+    if(temp == number) // если номера не проставлялись, значит все заполнено - остановить рекурсию
+        return;
+    Spiral(ar, number, ++level); // рекурсия
+}
 
 
 
