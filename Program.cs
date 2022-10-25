@@ -1,6 +1,6 @@
-﻿https://github.com/KalininPavel74/HomeWorkUnit7.git
+﻿using System.Text;
 
-// Калинин Павел 24.10.2022 
+// Калинин Павел 23.10.2022 
 // Знакомство с языками программирования (семинары)
 // Урок 8. Как не нужно писать код. Часть 2
 // Домашняя работа
@@ -16,7 +16,7 @@ void FillArray(int[,] ar, int aMin, int aMax) {
             ar[i,j] = random.Next(aMin, aMax);
 }
 void PrintArray(int[,] ar) {
-    if(ar == null) {
+    if(ar == null || ar.GetLength(0)==0) {
         Console.WriteLine("\t Массив пустой.");
         return;
     }    
@@ -29,6 +29,7 @@ void PrintArray(int[,] ar) {
 
 int[,] ar = null;
 
+/*
 
 taskName = "Задание  №54. Задайте двумерный массив."
           +" Напишите программу, которая упорядочит"
@@ -191,12 +192,8 @@ while(isRepeat) {
     for(int i=0; i<qtyRow; i++) arRows[i] = 0;
     for(int i=0; i<qtyCol; i++) arCols[i] = 0;
     FindRowsAndColsForDelete(ar, min, arRows, arCols);
-//    Console.Write("Строки  для удаления: ");
-//    for(int i=0; i<qtyRow; i++) Console.Write(arRows[i]+" ");
-//    Console.WriteLine("");
-//    Console.Write("Столбцы для удаления: ");
-//    for(int i=0; i<qtyCol; i++) Console.Write(arCols[i]+" ");
-//    Console.WriteLine("");
+//    Console.Write("Строки  для удаления: "); for(int i=0; i<qtyRow; i++) Console.Write(arRows[i]+" ");  Console.WriteLine("");
+//    Console.Write("Столбцы для удаления: "); for(int i=0; i<qtyCol; i++) Console.Write(arCols[i]+" ");  Console.WriteLine("");
     int[,] arResult = CopyArrayWithoutRowsCols(ar, arRows, arCols);
     Console.WriteLine("Ответ:");
     PrintArray(arResult);
@@ -282,11 +279,54 @@ while(isRepeat) {
     isRepeat = s != "0";
 }    
 
+*/
 
 
 taskName = "Задание №4. Показать треугольник Паскаля."
           +" Сделать вывод в виде равнобедренного треугольника.";
-//TODO
+isRepeat = true;
+while(isRepeat) {
+    Console.WriteLine("-----------------------------------\n\r"+taskName);
+    Console.Write("Введите размерность треугольника Паскаля: ");
+    int dimension = int.Parse(Console.ReadLine() ?? "0");
+    ar = new int[dimension,dimension];
+    Console.WriteLine("Ответ:");
+    // заполнить единицами первый столбец и диагональ
+    for(int i=0; i<dimension; i++) {
+        ar[i,0]=1;
+        ar[i,i]=1;
+    }    
+    // заполнить половину массива суммами
+    for(int i=2; i<dimension; i++)
+        for(int j=1; j<i; j++)
+            ar[i,j] = ar[i-1,j-1] + ar[i-1,j];
+//    PrintArray(ar);  Console.WriteLine("");
+    PrintHalfTriangle(ar);
+    Console.WriteLine("");
+    Console.Write("----\n\rВыполнить задание еще раз? (0-нет, 1-да):");
+    s = Console.ReadLine() ?? "0";
+    isRepeat = s != "0";
+}    
+
+void PrintHalfTriangle(int[,] ar) {
+    if(ar == null || ar.GetLength(0)==0) {
+        Console.WriteLine("\t Массив пустой.");
+        return;
+    }
+    int qtyRow = ar.GetLength(0);
+    // смещение с помощью табуляций
+    int shift = qtyRow-1;
+    string tabs = "";
+    for(int i=0; i<shift; i++) tabs += "\t";
+
+    for(int i=0; i<qtyRow; i++) {
+        Console.Write($"{tabs.Substring(i)}");
+        for(int j=0; j<=i; j++)
+            Console.Write($"{ar[i,j]} \t\t");
+        Console.WriteLine("\n");
+    }    
+}
+
 
 
 /*
